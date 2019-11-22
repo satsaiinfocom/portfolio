@@ -6,11 +6,11 @@ print(__name__)
 
 @app.route('/')
 def homepage():
-    return render_template('index.html')
+	return render_template('index.html')
 
 @app.route('/<string:page_name>')
 def html_page(page_name):
-    return render_template(page_name)
+	return render_template(page_name)
 
 def write_to_file(data):
 	with open('database.txt', mode='a') as database:
@@ -29,12 +29,12 @@ def write_to_csv(data):
 
 @app.route('/submit_form', methods=['POST', 'GET'])
 def submit_form():
-    if request.method == 'POST':
-    	try:
-	    	data = request.form.to_dict()
-	    	write_to_csv(data)
-	    	return redirect('/thankyou.html')
-	    except:
-	    	return 'Not connected to database.'
-    else:
-    	return 'Something went wrong. Try again.'
+	if request.method == 'POST':
+		try:
+			data = request.form.to_dict()
+			write_to_csv(data)
+			return redirect('/thankyou.html')
+		except:
+			return 'Not connected to database.'
+	else:
+		return 'Something went wrong. Try again.'
